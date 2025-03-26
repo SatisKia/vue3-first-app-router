@@ -8,7 +8,7 @@
         <router-link to="/setting">設定</router-link>
       </div>
     </div>
-    <input type="text" class="input" v-model="state.text" />
+    <input type="text" class="input" v-model="state.text" placeholder="100文字まで" />
     <div>
       <input type="radio" id="color1" name="color" value="#80ffff" checked />
       <label for="color1">シアン</label>
@@ -30,8 +30,8 @@
 import { defineComponent, onBeforeMount, onMounted, onBeforeUpdate, onUpdated, onBeforeUnmount, onUnmounted, reactive, watchEffect } from 'vue'
 
 interface State {
-  text: string;
-  isError: boolean;
+  text: string
+  isError: boolean
 }
 
 export default defineComponent({

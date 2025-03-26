@@ -26,6 +26,14 @@
 <script lang="ts">
 import { computed, defineComponent, onBeforeMount, onMounted, onBeforeUpdate, onUpdated, onBeforeUnmount, onUnmounted, PropType } from 'vue'
 import { Todo } from '@/types/todo'
+import store from '@/store'
+
+function keta (value: number): string {
+  if (value >= 100) {
+    return '' + (value % 100)
+  }
+  return ((value < 10) ? '0' : '') + value
+}
 
 export default defineComponent({
   props: {
@@ -51,7 +59,19 @@ export default defineComponent({
     const date = computed(() => {
       if (!props.todo) return ''
       const { date } = props.todo
-      return '' + date.getFullYear() + '年' + (date.getMonth() + 1) + '月' + date.getDate() + '日'
+      if (store.getters.dispYear) {
+        if (store.getters.dateType === 1) {
+          return '' + date.getFullYear() + '年' + (date.getMonth() + 1) + '月' + date.getDate() + '日'
+        } else {
+          return '' + keta(date.getFullYear()) + '/' + keta(date.getMonth() + 1) + '/' + keta(date.getDate())
+        }
+      } else {
+        if (store.getters.dateType === 1) {
+          return '' + (date.getMonth() + 1) + '月' + date.getDate() + '日'
+        } else {
+          return '' + keta(date.getMonth() + 1) + '/' + keta(date.getDate())
+        }
+      }
     })
 
     onBeforeMount(() => {

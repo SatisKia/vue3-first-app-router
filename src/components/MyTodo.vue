@@ -53,6 +53,8 @@ export default defineComponent({
           }
         })
       }
+      store.dispatch('setDateType', { dateType: cookie.getNumber('dateType', 1) })
+      store.dispatch('setDispYear', { dispYear: cookie.getBool('dispYear', true) })
     }
     const saveData = () => {
       console.log('saveData')
@@ -94,6 +96,7 @@ export default defineComponent({
 
     // computed
     const sortedTodo = computed(() => {
+      // 算出プロパティではデータを直接変更することができないため、sliceで配列をコピー
       const todoList = store.getters.todoList.slice()
       return todoList.sort((a: Todo, b: Todo) => {
         return b.date.getTime() - a.date.getTime()

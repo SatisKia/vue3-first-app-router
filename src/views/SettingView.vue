@@ -1,17 +1,15 @@
 <template>
-  <div id="setting">
-    <my-todo />
-  </div>
+  <my-setting />
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import MyTodo from '@/components/MyTodo.vue' // @ is an alias to /src
+import MySetting from '@/components/MySetting.vue' // @ is an alias to /src
 
 export default defineComponent({
   name: 'SettingView',
   components: {
-    MyTodo
+    MySetting
   }
 })
 </script>
